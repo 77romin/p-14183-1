@@ -309,8 +309,8 @@ export interface components {
             createDate?: string;
             /** Format: date-time */
             modifyDate?: string;
-            name?: string;
             username?: string;
+            name?: string;
         };
         AdmPostCountResBody: {
             /** Format: int64 */
