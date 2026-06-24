@@ -6,16 +6,16 @@ import { useRouter } from "next/navigation";
 export default function Page() {
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.target as HTMLFormElement;
 
     const usernameInput = form.elements.namedItem(
-      "username"
+      "username",
     ) as HTMLInputElement;
     const passwordInput = form.elements.namedItem(
-      "password"
+      "password",
     ) as HTMLTextAreaElement;
 
     usernameInput.value = usernameInput.value.trim();

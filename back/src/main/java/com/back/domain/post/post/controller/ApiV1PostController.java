@@ -15,11 +15,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Validated
 @RequestMapping("/api/v1/posts")
 @RequiredArgsConstructor
 @Tag(name = "ApiV1PostController", description = "API 글 컨트롤러")
@@ -36,14 +38,16 @@ public class ApiV1PostController {
 
         return items
                 .stream()
-                .map(PostDto::new) // PostDto로 변환
+                .map(PostDto::new)
                 .toList();
     }
 
     @GetMapping("/{id}")
     @Transactional(readOnly = true)
     @Operation(summary = "단건 조회")
-    public PostWithContentDto getItem(@PathVariable int id) {
+    public PostWithContentDto getItem(
+            @PathVariable int id
+    ) {
         Post post = postService.findById(id).get();
 
         return new PostWithContentDto(post);
@@ -52,9 +56,7 @@ public class ApiV1PostController {
     @DeleteMapping("/{id}")
     @Transactional
     @Operation(summary = "삭제")
-    public RsData<Void> delete(
-            @PathVariable int id
-    ) {
+    public RsData<Void> delete(@PathVariable int id) {
         Member actor = rq.getActor();
 
         Post post = postService.findById(id).get();
@@ -70,7 +72,7 @@ public class ApiV1PostController {
     }
 
 
-    record PostWriteReqBody(
+    public record PostWriteReqBody(
             @NotBlank
             @Size(min = 2, max = 100)
             String title,
@@ -84,7 +86,7 @@ public class ApiV1PostController {
     @Transactional
     @Operation(summary = "작성")
     public RsData<PostDto> write(
-            @Valid @RequestBody PostWriteReqBody reqBody
+            @RequestBody @Valid PostWriteReqBody reqBody
     ) {
         Member actor = rq.getActor();
 
@@ -97,7 +99,8 @@ public class ApiV1PostController {
         );
     }
 
-    record PostModifyReqBody(
+
+    public record PostModifyReqBody(
             @NotBlank
             @Size(min = 2, max = 100)
             String title,
@@ -112,7 +115,7 @@ public class ApiV1PostController {
     @Operation(summary = "수정")
     public RsData<Void> modify(
             @PathVariable int id,
-            @Valid @RequestBody PostModifyReqBody reqBody
+            @RequestBody @Valid PostModifyReqBody reqBody
     ) {
         Member actor = rq.getActor();
 
