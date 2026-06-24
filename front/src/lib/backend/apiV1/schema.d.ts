@@ -245,11 +245,11 @@ export interface components {
             /** Format: date-time */
             modifyDate: string;
             /** Format: int32 */
-            authorId?: number;
-            authorName?: string;
+            authorId: number;
+            authorName: string;
             /** Format: int32 */
-            postId?: number;
-            content?: string;
+            postId: number;
+            content: string;
         };
         RsDataPostCommentDto: {
             resultCode?: string;
@@ -309,8 +309,8 @@ export interface components {
             createDate: string;
             /** Format: date-time */
             modifyDate: string;
-            username: string;
             name: string;
+            username: string;
         };
         AdmPostCountResBody: {
             /** Format: int64 */
