@@ -1,7 +1,7 @@
 "use client";
 
 import { apiFetch } from "@/lib/backend/client";
-import type { components } from "@/lib/backend/apiV1/schema";
+import type { components } from "@/lib/backend/apiV1/schema.d.ts";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
