@@ -239,11 +239,11 @@ export interface components {
         };
         PostCommentDto: {
             /** Format: int32 */
-            id?: number;
+            id: number;
             /** Format: date-time */
-            createDate?: string;
+            createDate: string;
             /** Format: date-time */
-            modifyDate?: string;
+            modifyDate: string;
             /** Format: int32 */
             authorId?: number;
             authorName?: string;
